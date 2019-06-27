@@ -6,19 +6,23 @@ Where:
   <path> is the location to make input stream of the virtual controller.
 
 Options:
+  -h --help       Show this help.
   --port <number> Specify the port number to listen.
   -b --browser    Open the browser automatically.
 """
 
+import sys
 from docopt import docopt
 from .os import create_fifo
 from .server import serve
 
 
-def command_line():
+def main():
     """
     Parse command line arguments and start the application.
     """
+    if len(sys.argv) == 1:
+        sys.argv.append('-h')
     args = docopt(__doc__)
 
     path = args['<path>']

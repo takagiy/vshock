@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Virtual Shock</h1>
+
+<label>
+    <input type="checkbox" onChange="send_event(1, 0, Number(this.checked))">Select
+</label>
+<label>
+    <input type="checkbox" onChange="send_event(1, 1, Number(this.checked))">Left Stick
+</label>
+<label>
+    <input type="checkbox" onChange="send_event(1, 2, Number(this.checked))">Right Stick
+</label>
+<label>
+    <input type="checkbox" onChange="send_event(1, 3, Number(this.checked))">Start
+</label>
+<label>
+    <input type="checkbox" onChange="send_event(1, 4, Number(this.checked))">Up
+</label>
+<label>
+    <input type="checkbox" onChange="send_event(1, 5, Number(this.checked))">Right
+</label>
+<label>
+    <input type="checkbox" onChange="send_event(1, 6, Number(this.checked))">Down
+</label>
+<label>
+    <input type="checkbox" onChange="send_event(1, 7, Number(this.checked))">Left
+</label>
+<label>
+    <input type="checkbox" onChange="send_event(1, 8, Number(this.checked))">L2
+</label>
+<label>
+    <input type="checkbox" onChange="send_event(1, 9, Number(this.checked))">R2
+</label>
+<label>
+    <input type="checkbox" onChange="send_event(1, 10, Number(this.checked))">L1
+</label>
+<label>
+    <input type="checkbox" onChange="send_event(1, 11, Number(this.checked))">R1
+</label>
+<label>
+    <input type="checkbox" onChange="send_event(1, 12, Number(this.checked))">Triangle
+</label>
+<label>
+    <input type="checkbox" onChange="send_event(1, 13, Number(this.checked))">Circle
+</label>
+<label>
+    <input type="checkbox" onChange="send_event(1, 14, Number(this.checked))">Cross
+</label>
+<label>
+    <input type="checkbox" onChange="send_event(1, 15, Number(this.checked))">Square
+</label>
+
+<input type="range" min="-128" max="127" step="1" onChange="send_event(2, 0, Number(this.value))">Left Stick Y
+<input type="range" min="-128" max="127" step="1" onChange="send_event(2, 1, Number(this.value))">Left Stick X
+<input type="range" min="-128" max="127" step="1" onChange="send_event(2, 2, Number(this.value))">Right Stick Y
+<input type="range" min="-128" max="127" step="1" onChange="send_event(2, 3, Number(this.value))">Right Stick X
+
+<script>
+    var ws = new WebSocket('ws://localhost:8080/input');
+    
+    function send_event(input_type, button_number, value) {
+        ws.send(JSON.stringify({input_type: input_type, button_number: button_number, value: value}));
+    }
+</script>
+
+</body>
+</html>
+
