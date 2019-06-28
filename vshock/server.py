@@ -28,10 +28,10 @@ class WsServer(WebSocketHandler):
 
 
 def serve(port, js_stream, browser):
-    static = path.join(path.dirname(__file__), 'static')
+    ui = path.join(path.dirname(__file__), 'assets/ui')
     app = web.Application([(r"/input", WsServer, dict(js_stream=js_stream)),
                            (r"/(.*)", StaticFileHandler, {
-                               'path': static,
+                               'path': ui,
                                'default_filename': 'index.html'
                            })])
     app.listen(port)
