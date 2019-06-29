@@ -1,5 +1,15 @@
+# Requiement
+* python3
+* pip (or manually install docopt and tornado)
+
+# Installation
 ```console
-~ $ vshock
+sudo pip install vshock
+```
+
+# Usage
+
+```console
 Usage:
   vshock <path> [options]
 
