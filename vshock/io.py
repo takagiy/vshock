@@ -2,6 +2,7 @@ import struct
 import atexit
 import os
 import io
+from os.path import abspath
 
 
 def create_fifo(path):
@@ -10,6 +11,7 @@ def create_fifo(path):
     And remove it at exit.
     """
     os.mkfifo(path)
+    print("A fifo is created at %s." % abspath(path))
     atexit.register(os.unlink, path)
 
 
@@ -26,7 +28,8 @@ class JoystickStream:
         return self
 
     def __exit__(self, *args):
-        self.file.__exit__()
+        if self.file:
+            self.file.__exit__()
 
     def emit(self, message):
         self.ensure_opened_file()
