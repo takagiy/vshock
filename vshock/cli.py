@@ -13,7 +13,7 @@ Options:
 
 import sys
 from docopt import docopt
-from .os import create_fifo
+from .io import create_fifo
 from .server import serve
 
 
