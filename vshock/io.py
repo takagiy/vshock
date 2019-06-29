@@ -1,8 +1,21 @@
-import struct
 import atexit
-import os
+import struct
 import io
+import os
 from os.path import abspath
+
+
+class Umask:
+    def __init__(self, mask):
+        self.mask = mask
+        self.old_mask = None
+
+    def __enter__(self):
+        self.old_mask = os.umask(self.mask)
+        return self
+
+    def __exit__(self, *args):
+        os.umask(self.old_mask)
 
 
 def create_fifo(path):
@@ -10,9 +23,11 @@ def create_fifo(path):
     Make an fifo(named pipe) at specific path.
     And remove it at exit.
     """
-    os.mkfifo(path)
-    print("A fifo is created at %s." % abspath(path))
+    with Umask(0o000):
+        os.mkfifo(path, 0o666)
     atexit.register(os.unlink, path)
+    print("A fifo is created at %s." % abspath(path))
+
 
 
 class JoystickStream:
