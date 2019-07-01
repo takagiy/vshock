@@ -1,3 +1,6 @@
+# How it works
+First, vshock creates a unix fifo(named pipe) in the specific path. Then it sends pseudo input data to the fifo according to your instructions in the web UI.
+
 # Requiement
 * python3
 * pip (or manually install docopt and tornado)
